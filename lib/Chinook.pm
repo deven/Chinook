@@ -28,6 +28,11 @@ __PACKAGE__->config(
         configs => { # Model configs
             DB => {
                 grid_params => {
+                    '*defaults' => {
+                        updatable_colspec   => ['*'],
+                        creatable_colspec   => ['*'],
+                        destroyable_relspec => ['*'],
+                    },
                     Album => {
                         include_colspec => ['*', 'artistid.name'],
                     },
