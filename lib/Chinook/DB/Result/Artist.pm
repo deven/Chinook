@@ -14,22 +14,27 @@ extends 'DBIx::Class::Core';
 __PACKAGE__->load_components("InflateColumn::DateTime");
 __PACKAGE__->table("Artist");
 __PACKAGE__->add_columns(
-  "artistid",
-  { data_type => "integer", is_auto_increment => 1, is_nullable => 0 },
-  "name",
-  { data_type => "nvarchar", is_nullable => 1, size => 120 },
+  "ArtistId",
+  {
+    accessor          => "artist_id",
+    data_type         => "integer",
+    is_auto_increment => 1,
+    is_nullable       => 0,
+  },
+  "Name",
+  { accessor => "name", data_type => "nvarchar", is_nullable => 1, size => 120 },
 );
-__PACKAGE__->set_primary_key("artistid");
+__PACKAGE__->set_primary_key("ArtistId");
 __PACKAGE__->has_many(
   "albums",
   "Chinook::DB::Result::Album",
-  { "foreign.artistid" => "self.artistid" },
+  { "foreign.ArtistId" => "self.ArtistId" },
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07049 @ 2020-03-29 00:51:06
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:U1ZLBRaAssdRxo3bw1/v3A
+# Created by DBIx::Class::Schema::Loader v0.07049 @ 2020-03-29 06:11:06
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:WkLbVdH0JbR76YOhfZbYHQ
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

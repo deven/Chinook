@@ -14,54 +14,89 @@ extends 'DBIx::Class::Core';
 __PACKAGE__->load_components("InflateColumn::DateTime");
 __PACKAGE__->table("Employee");
 __PACKAGE__->add_columns(
-  "employeeid",
-  { data_type => "integer", is_auto_increment => 1, is_nullable => 0 },
-  "lastname",
-  { data_type => "nvarchar", is_nullable => 0, size => 20 },
-  "firstname",
-  { data_type => "nvarchar", is_nullable => 0, size => 20 },
-  "title",
-  { data_type => "nvarchar", is_nullable => 1, size => 30 },
-  "reportsto",
-  { data_type => "integer", is_foreign_key => 1, is_nullable => 1 },
-  "birthdate",
-  { data_type => "datetime", is_nullable => 1 },
-  "hiredate",
-  { data_type => "datetime", is_nullable => 1 },
-  "address",
-  { data_type => "nvarchar", is_nullable => 1, size => 70 },
-  "city",
-  { data_type => "nvarchar", is_nullable => 1, size => 40 },
-  "state",
-  { data_type => "nvarchar", is_nullable => 1, size => 40 },
-  "country",
-  { data_type => "nvarchar", is_nullable => 1, size => 40 },
-  "postalcode",
-  { data_type => "nvarchar", is_nullable => 1, size => 10 },
-  "phone",
-  { data_type => "nvarchar", is_nullable => 1, size => 24 },
-  "fax",
-  { data_type => "nvarchar", is_nullable => 1, size => 24 },
-  "email",
-  { data_type => "nvarchar", is_nullable => 1, size => 60 },
+  "EmployeeId",
+  {
+    accessor          => "employee_id",
+    data_type         => "integer",
+    is_auto_increment => 1,
+    is_nullable       => 0,
+  },
+  "LastName",
+  {
+    accessor => "last_name",
+    data_type => "nvarchar",
+    is_nullable => 0,
+    size => 20,
+  },
+  "FirstName",
+  {
+    accessor => "first_name",
+    data_type => "nvarchar",
+    is_nullable => 0,
+    size => 20,
+  },
+  "Title",
+  { accessor => "title", data_type => "nvarchar", is_nullable => 1, size => 30 },
+  "ReportsTo",
+  {
+    accessor       => "reports_to",
+    data_type      => "integer",
+    is_foreign_key => 1,
+    is_nullable    => 1,
+  },
+  "BirthDate",
+  { accessor => "birth_date", data_type => "datetime", is_nullable => 1 },
+  "HireDate",
+  { accessor => "hire_date", data_type => "datetime", is_nullable => 1 },
+  "Address",
+  {
+    accessor => "address",
+    data_type => "nvarchar",
+    is_nullable => 1,
+    size => 70,
+  },
+  "City",
+  { accessor => "city", data_type => "nvarchar", is_nullable => 1, size => 40 },
+  "State",
+  { accessor => "state", data_type => "nvarchar", is_nullable => 1, size => 40 },
+  "Country",
+  {
+    accessor => "country",
+    data_type => "nvarchar",
+    is_nullable => 1,
+    size => 40,
+  },
+  "PostalCode",
+  {
+    accessor => "postal_code",
+    data_type => "nvarchar",
+    is_nullable => 1,
+    size => 10,
+  },
+  "Phone",
+  { accessor => "phone", data_type => "nvarchar", is_nullable => 1, size => 24 },
+  "Fax",
+  { accessor => "fax", data_type => "nvarchar", is_nullable => 1, size => 24 },
+  "Email",
+  { accessor => "email", data_type => "nvarchar", is_nullable => 1, size => 60 },
 );
-__PACKAGE__->set_primary_key("employeeid");
+__PACKAGE__->set_primary_key("EmployeeId");
 __PACKAGE__->has_many(
   "customers",
   "Chinook::DB::Result::Customer",
-  { "foreign.supportrepid" => "self.employeeid" },
+  { "foreign.SupportRepId" => "self.EmployeeId" },
   { cascade_copy => 0, cascade_delete => 0 },
 );
 __PACKAGE__->has_many(
   "employees",
   "Chinook::DB::Result::Employee",
-  { "foreign.reportsto" => "self.employeeid" },
+  { "foreign.ReportsTo" => "self.EmployeeId" },
   { cascade_copy => 0, cascade_delete => 0 },
 );
 __PACKAGE__->belongs_to(
-  "reportsto",
+  "report_to",
   "Chinook::DB::Result::Employee",
-  { employeeid => "reportsto" },
+  { EmployeeId => "ReportsTo" },
   {
     is_deferrable => 0,
     join_type     => "LEFT",
@@ -71,8 +106,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07049 @ 2020-03-29 00:51:06
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:yWetYLpjRii5+5htBdIGHA
+# Created by DBIx::Class::Schema::Loader v0.07049 @ 2020-03-29 06:11:06
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:fOadE0OfkRUmtYOEdBst+A
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration

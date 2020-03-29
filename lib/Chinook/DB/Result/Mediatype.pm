@@ -1,5 +1,5 @@
 use utf8;
-package Chinook::DB::Result::MediaType;
+package Chinook::DB::Result::Mediatype;
 
 # Created by DBIx::Class::Schema::Loader
 # DO NOT MODIFY THE FIRST PART OF THIS FILE
@@ -14,22 +14,27 @@ extends 'DBIx::Class::Core';
 __PACKAGE__->load_components("InflateColumn::DateTime");
 __PACKAGE__->table("MediaType");
 __PACKAGE__->add_columns(
-  "mediatypeid",
-  { data_type => "integer", is_auto_increment => 1, is_nullable => 0 },
-  "name",
-  { data_type => "nvarchar", is_nullable => 1, size => 120 },
+  "MediaTypeId",
+  {
+    accessor          => "media_type_id",
+    data_type         => "integer",
+    is_auto_increment => 1,
+    is_nullable       => 0,
+  },
+  "Name",
+  { accessor => "name", data_type => "nvarchar", is_nullable => 1, size => 120 },
 );
-__PACKAGE__->set_primary_key("mediatypeid");
+__PACKAGE__->set_primary_key("MediaTypeId");
 __PACKAGE__->has_many(
   "tracks",
   "Chinook::DB::Result::Track",
-  { "foreign.mediatypeid" => "self.mediatypeid" },
+  { "foreign.MediaTypeId" => "self.MediaTypeId" },
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07049 @ 2020-03-29 00:51:06
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:JddgATFHPC8ETtuhwBJeew
+# Created by DBIx::Class::Schema::Loader v0.07049 @ 2020-03-29 06:11:06
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:R2bv+QweA/qLp++SQeDpuA
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration
