@@ -25,6 +25,18 @@ __PACKAGE__->config(
     'Plugin::RapidApp::RapidDbic' => {
         # Only required option:
         dbic_models => ['DB'],
+        configs => { # Model configs
+            DB => {
+                grid_params => {
+                    Album => {
+                        include_colspec => ['*', 'artistid.name'],
+                    },
+                    Track => {
+                        include_colspec => ['*', 'albumid.artistid.*'],
+                    },
+                },
+            },
+        },
     },
 );
 
