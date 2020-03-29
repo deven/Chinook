@@ -4,36 +4,16 @@ use namespace::autoclean;
 
 use Catalyst::Runtime 5.80;
 
-# Set flags and add plugins for the application.
-#
-# Note that ORDERING IS IMPORTANT here as plugins are initialized in order,
-# therefore you almost certainly want to keep ConfigLoader at the head of the
-# list if you're using it.
-#
-#         -Debug: activates the debug mode for very useful log messages
-#   ConfigLoader: will load the configuration from a Config::General file in the
-#                 application's home directory
-# Static::Simple: will serve static files from the application's root
-#                 directory
+use RapidApp;
 
 use Catalyst qw/
     -Debug
-    ConfigLoader
-    Static::Simple
+    RapidApp::RapidDbic
 /;
 
 extends 'Catalyst';
 
 our $VERSION = '0.01';
-
-# Configure the application.
-#
-# Note that settings in chinook.conf (or other external
-# configuration file that you set up manually) take precedence
-# over this when using ConfigLoader. Thus configuration
-# details given here can function as a default configuration,
-# with an external configuration file acting as an override for
-# local deployment.
 
 __PACKAGE__->config(
     name => 'Chinook',
@@ -41,6 +21,11 @@ __PACKAGE__->config(
     disable_component_resolution_regex_fallback => 1,
     enable_catalyst_header => 1, # Send X-Catalyst header
     encoding => 'UTF-8', # Setup request decoding and response encoding
+
+    'Plugin::RapidApp::RapidDbic' => {
+        # Only required option:
+        dbic_models => ['DB'],
+    },
 );
 
 # Start the application
