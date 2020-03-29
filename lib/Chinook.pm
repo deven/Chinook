@@ -36,6 +36,18 @@ __PACKAGE__->config(
                     Album => {
                         include_colspec => ['*', 'artistid.name'],
                     },
+                    Invoice => {
+                        # Delete invoice_lines with invoice (cascade):
+                        destroyable_relspec => ['*', 'invoice_lines'],
+                    },
+                    InvoiceLines => {
+                        # Join all columns of all relationships (first-level):
+                        include_colspec   => ['*', '*.*'],
+                        updatable_colspec => [
+                            'invoiceid', 'unitprice',
+                            'billing*',
+                        ],
+                    },
                     Track => {
                         include_colspec => ['*', 'albumid.artistid.*'],
                     },
