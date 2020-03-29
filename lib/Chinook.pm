@@ -35,6 +35,20 @@ __PACKAGE__->config(
                         include_colspec => ['*', 'albumid.artistid.*'],
                     },
                 },
+                TableSpecs => {
+                    Album => {
+                        display_column => 'title',
+                    },
+                    Artist => {
+                        display_column => 'name',
+                    },
+                    Genre => {
+                        display_column => 'name',
+                    },
+                    MediaType => {
+                        display_column => 'name',
+                    },
+                },
             },
         },
     },
